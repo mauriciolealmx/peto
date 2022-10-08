@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Routes from './Routes';
+
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 
@@ -14,6 +16,7 @@ const App = () => {
           <Navbar.Toggle />
         </Container>
       </Navbar>
+      <Routes />
     </Container>
   );
 };
