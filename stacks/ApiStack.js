@@ -16,6 +16,7 @@ const ApiStack = ({ stack }) => {
     },
     routes: {
       'POST /posts': 'functions/posts/create.main',
+      'GET /posts': 'functions/posts/list.main',
     },
   });
 
