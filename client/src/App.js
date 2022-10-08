@@ -20,7 +20,7 @@ const App = () => {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Nav activeKey={window.location.pathname}>
-              <LinkContainer to="/new">
+              <LinkContainer to="/posts/new">
                 <Nav.Link>Create</Nav.Link>
               </LinkContainer>
             </Nav>
