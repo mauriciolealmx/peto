@@ -12,7 +12,7 @@ export const main = handler(async (event) => {
     Item: {
       userId: identityId,
       postId: uuid.v1(),
-      imageURL: '', // TODO: Needs to come from Frontend.
+      imageURL: data.imageURL,
       clickCount: 0,
       createdAt: Date.now(),
     },
