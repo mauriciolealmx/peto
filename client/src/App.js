@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Auth } from 'aws-amplify';
 import { LinkContainer } from 'react-router-bootstrap';
+import { useRecoilState } from 'recoil';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
+import userState from './atoms/user.atom';
 import Routes from './Routes';
 
 const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useRecoilState(userState);
+
+  useEffect(() => {
+    const logIn = async () => {
+      await Auth.signIn('mvp-user@gmail.com', 'Passw0rd!');
+    };
+
+    if (!isAuthenticated) {
+      logIn();
+    }
+  }, [isAuthenticated, setIsAuthenticated]);
+
   return (
     <Container>
       <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
