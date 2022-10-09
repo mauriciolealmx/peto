@@ -2,9 +2,11 @@ import { ReactStaticSite, use } from '@serverless-stack/resources';
 
 import ApiStack from './ApiStack';
 import StorageStack from './StorageStack';
+import AuthStack from './AuthStack';
 
 const FrontendStack = ({ stack, app }) => {
   const { api } = use(ApiStack);
+  const { auth } = use(AuthStack);
   const { bucket } = use(StorageStack);
 
   const site = new ReactStaticSite(stack, 'ReactSite', {
