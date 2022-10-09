@@ -4,10 +4,13 @@ import handler from '../../utils/handler';
 import dynamoDb from '../../utils/dynamodb';
 
 export const main = handler(async (event) => {
+  const { identityId } = event.requestContext.authorizer.iam.cognitoIdentity;
+  const data = JSON.parse(event.body);
+
   const params = {
     TableName: process.env.TABLE_NAME,
     Item: {
-      userId: 'mvp-user',
+      userId: identityId,
       postId: uuid.v1(),
       imageURL: '', // TODO: Needs to come from Frontend.
       clickCount: 0,

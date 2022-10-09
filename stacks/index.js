@@ -3,6 +3,7 @@ import { App } from '@serverless-stack/resources';
 import ApiStack from './ApiStack';
 import FrontendStack from './FrontendStack';
 import StorageStack from './StorageStack';
+import AuthStack from './AuthStack';
 
 /**
  * @param {App} app
@@ -16,5 +17,5 @@ export default function (app) {
     },
   });
 
-  app.stack(StorageStack).stack(ApiStack).stack(FrontendStack);
+  app.stack(StorageStack).stack(ApiStack).stack(AuthStack).stack(FrontendStack);
 }

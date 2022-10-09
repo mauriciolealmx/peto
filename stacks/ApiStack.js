@@ -6,6 +6,7 @@ const ApiStack = ({ stack }) => {
 
   const api = new Api(stack, 'Api', {
     defaults: {
+      authorizer: 'iam',
       function: {
         permissions: [bucket, table],
         environment: {
