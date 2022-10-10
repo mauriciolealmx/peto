@@ -16,6 +16,7 @@ const App = () => {
   useEffect(() => {
     const logIn = async () => {
       await Auth.signIn('mvp-user@gmail.com', 'Passw0rd!');
+      setIsAuthenticated(true);
     };
 
     if (!isAuthenticated) {
