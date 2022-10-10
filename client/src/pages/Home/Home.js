@@ -34,14 +34,12 @@ const Home = () => {
     onLoad();
   }, [isAuthenticated, setPosts]);
 
-  console.log(allPosts)
-
   return (
     <div id="home-root" className="Home">
       {allPosts.length > 0 && (
         <Stack className="images-root" direction="horizontal">
           {allPosts.map((post) => (
-            <Image src={post.attachmentURL} />
+            <Image key={post.attachmentURL} src={post.attachmentURL} />
           ))}
         </Stack>
       )}
