@@ -1,23 +1,11 @@
 #home-root .images-root {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  gap: 1px;
 }
 
 #home-root img {
   aspect-ratio: 1 /1;
   width: 100%;
   object-fit: cover;
-}
-
-@media screen and (max-width: 1200px) {
-  .images-root {
-    gap: 28px;
-  }
-}
-
-@media screen and (max-width: 735px) {
-  .images-root {
-    gap: 1px;
-  }
 }

@@ -34,6 +34,8 @@ const Home = () => {
     onLoad();
   }, [isAuthenticated, setPosts]);
 
+  console.log(allPosts)
+
   return (
     <div id="home-root" className="Home">
       {allPosts.length > 0 && (
