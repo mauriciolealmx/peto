@@ -60,7 +60,7 @@ const NewPost = () => {
           isLoading={isLoading}
           disabled={!file?.size}
         >
-          Create
+          Upload
         </LoaderButton>
       </Form>
     </div>

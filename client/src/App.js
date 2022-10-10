@@ -37,7 +37,7 @@ const App = () => {
           <Navbar.Collapse className="justify-content-end">
             <Nav activeKey={window.location.pathname}>
               <LinkContainer to="/posts/new">
-                <Nav.Link>Create</Nav.Link>
+                <Nav.Link>Upload</Nav.Link>
               </LinkContainer>
             </Nav>
           </Navbar.Collapse>
