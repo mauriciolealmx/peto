@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { API } from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
@@ -10,18 +10,18 @@ import s3Updload from '../../utils/s3Upload';
 import './NewPost.css';
 
 const NewPost = () => {
-  const file = useRef(null);
+  const [file, setFile] = useState(null);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (event) => {
-    file.current = event.target.files[0];
+    setFile(event.target.files[0]);
   };
 
   async function handleSubmit(event) {
     event.preventDefault();
 
-    if (file.current?.size > config.MAX_ATTACHMENT_SIZE) {
+    if (file?.size > config.MAX_ATTACHMENT_SIZE) {
       const maxMegabytes = config.MAX_ATTACHMENT_SIZE / 1_000_000;
       alert(`Please pick a file smaller than ${maxMegabytes} MB.`);
 
@@ -31,7 +31,7 @@ const NewPost = () => {
     setIsLoading(true);
 
     try {
-      const imageURL = file.current ? await s3Updload(file.current) : null;
+      const imageURL = file ? await s3Updload(file) : null;
 
       await API.post('posts', '/posts', {
         body: { imageURL },
@@ -58,7 +58,7 @@ const NewPost = () => {
           size="lg"
           variant="primary"
           isLoading={isLoading}
-          disabled={!file.current}
+          disabled={!file?.size}
         >
           Create
         </LoaderButton>
