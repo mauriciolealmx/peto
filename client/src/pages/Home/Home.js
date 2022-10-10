@@ -35,7 +35,7 @@ const Home = () => {
   }, [isAuthenticated, setPosts]);
 
   return (
-    <div className="Home">
+    <div id="home-root" className="Home">
       {allPosts.length > 0 && (
         <Stack className="images-root" direction="horizontal">
           {allPosts.map((post) => (
