@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
-import { API } from 'aws-amplify';
+import { API, Storage } from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 
 import LoaderButton from '../../components/LoaderButton';
 import config from '../../config/aws-amplify.config';
+import postsState from '../../atoms/posts.atom';
 import s3Updload from '../../utils/s3Upload';
 
 import './NewPost.css';
 
 const NewPost = () => {
+  const setPostsState = useSetRecoilState(postsState);
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -33,9 +36,12 @@ const NewPost = () => {
     try {
       const imageURL = file ? await s3Updload(file) : null;
 
-      await API.post('posts', '/posts', {
+      const newPost = await API.post('posts', '/posts', {
         body: { imageURL },
       });
+
+      newPost.attachmentURL = await Storage.vault.get(newPost.imageURL);
+      setPostsState((prevPosts) => [...prevPosts, newPost]);
 
       navigate('/');
     } catch (e) {
