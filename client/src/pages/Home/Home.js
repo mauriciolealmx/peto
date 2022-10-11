@@ -3,6 +3,7 @@ import { API, Storage } from 'aws-amplify';
 import { useRecoilValue } from 'recoil';
 
 import Image from 'react-bootstrap/Image';
+import Skeleton from 'react-loading-skeleton';
 import Stack from 'react-bootstrap/Stack';
 
 import userState from '../../atoms/user.atom';
@@ -11,6 +12,7 @@ import './Home.css';
 
 const Home = () => {
   const [allPosts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const isAuthenticated = useRecoilValue(userState);
 
   useEffect(() => {
@@ -28,6 +30,7 @@ const Home = () => {
 
         const postsWithURL = await Promise.all(postsPromises);
         setPosts(postsWithURL);
+        setIsLoading(false);
       } catch (e) {}
     };
 
@@ -36,13 +39,16 @@ const Home = () => {
 
   return (
     <div id="home-root" className="Home">
-      {allPosts.length > 0 && (
-        <Stack className="images-root" direction="horizontal">
-          {allPosts.map((post) => (
+      <Stack className="images-root" direction="horizontal">
+        {isLoading &&
+          Array.from(Array(9).keys()).map((idx) => (
+            <Skeleton key={idx} className="skeleton" count={1} />
+          ))}
+        {!isLoading &&
+          allPosts.map((post) => (
             <Image key={post.attachmentURL} src={post.attachmentURL} />
           ))}
-        </Stack>
-      )}
+      </Stack>
     </div>
   );
 };
