@@ -9,6 +9,8 @@ import Stack from 'react-bootstrap/Stack';
 
 import userState from '../../atoms/user.atom';
 
+import './Post.css';
+
 const Post = () => {
   const { id: postId } = useParams();
   const [post, setPost] = useState([]);
@@ -23,7 +25,6 @@ const Post = () => {
 
       try {
         const fetchedPost = await API.get('posts', `/posts/${postId}`);
-        console.log('running...', fetchedPost);
         const attachmentURL = await Storage.vault.get(fetchedPost.imageURL);
 
         setPost({ ...fetchedPost, attachmentURL });
@@ -35,7 +36,7 @@ const Post = () => {
   }, [isAuthenticated, postId]);
 
   return (
-    <div id="post-root" className="Home">
+    <div id="post-root" className="post">
       <Stack className="images-root" direction="horizontal">
         {isLoading && <Skeleton className="skeleton" count={1} />}
         {!isLoading && <Image src={post.attachmentURL} width="100%" />}

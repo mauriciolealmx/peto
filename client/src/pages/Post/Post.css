@@ -1,0 +1,13 @@
+#post-root .images-root {
+  display: grid;
+}
+
+#post-root img {
+  width: 100%;
+}
+
+#post-root .skeleton {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  object-fit: cover;
+}
