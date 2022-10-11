@@ -4,13 +4,9 @@
   gap: 1px;
 }
 
-#home-root img {
-  aspect-ratio: 1 /1;
-  width: 100%;
-  object-fit: cover;
-}
-
-#home-root .skeleton {
+#home-root img,
+video,
+.skeleton {
   aspect-ratio: 1 /1;
   width: 100%;
   object-fit: cover;
