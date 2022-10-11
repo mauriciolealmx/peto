@@ -1,25 +1,28 @@
 import { useEffect, useState } from 'react';
 import { API, Storage } from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 
 import Image from 'react-bootstrap/Image';
 import Skeleton from 'react-loading-skeleton';
 import Stack from 'react-bootstrap/Stack';
 
 import userState from '../../atoms/user.atom';
+import postsState from '../../atoms/posts.atom';
 
 import './Home.css';
 
 const Home = () => {
-  const [allPosts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [allPosts, setPostsState] = useRecoilState(postsState);
+  const hasPosts = allPosts.length > 0;
+
+  const [isLoading, setIsLoading] = useState(!hasPosts);
   const isAuthenticated = useRecoilValue(userState);
   const navigate = useNavigate();
 
   useEffect(() => {
     const onLoad = async () => {
-      if (!isAuthenticated) {
+      if (!isAuthenticated || hasPosts) {
         return;
       }
 
@@ -31,13 +34,13 @@ const Home = () => {
         }));
 
         const postsWithURL = await Promise.all(postsPromises);
-        setPosts(postsWithURL);
+        setPostsState(postsWithURL);
         setIsLoading(false);
       } catch (e) {}
     };
 
     onLoad();
-  }, [isAuthenticated, setPosts]);
+  }, [isAuthenticated, setPostsState, hasPosts]);
 
   const handleImageClick = (postId) => {
     navigate(`/posts/${postId}`);
