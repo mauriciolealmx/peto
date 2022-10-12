@@ -7,8 +7,9 @@ import Image from 'react-bootstrap/Image';
 import Skeleton from 'react-loading-skeleton';
 import Stack from 'react-bootstrap/Stack';
 
-import userState from '../../atoms/user.atom';
+import getDevImage from '../../utils/getDevImage';
 import postsState from '../../atoms/posts.atom';
+import userState from '../../atoms/user.atom';
 
 import './Home.css';
 
@@ -32,10 +33,14 @@ const Home = () => {
       }
 
       try {
+        // For development
+        const devImageUrl = getDevImage();
+
         const posts = await API.get('posts', '/posts');
         const postsPromises = posts.map(async (post) => ({
           ...post,
-          attachmentURL: await Storage.vault.get(post.imageURL),
+          attachmentURL:
+            devImageUrl || (await Storage.vault.get(post.imageURL)),
         }));
 
         const postsWithURL = await Promise.all(postsPromises);
