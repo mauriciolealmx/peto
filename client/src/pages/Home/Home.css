@@ -1,13 +1,24 @@
 #home-root .images-root {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
+  gap: 28px;
 }
 
 #home-root img,
 video,
 .skeleton {
-  aspect-ratio: 1 /1;
+  aspect-ratio: 2 / 1;
   width: 100%;
   object-fit: cover;
+}
+
+.titles {
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 600px) {
+  #home-root .images-root {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1px;
+  }
 }
