@@ -19,6 +19,7 @@ const ApiStack = ({ stack }) => {
       'GET /posts': 'functions/posts/list.main',
       'GET /posts/{id}': 'functions/posts/get.main',
       'POST /posts': 'functions/posts/create.main',
+      'POST /email': 'functions/emails/send.main',
     },
   });
 
