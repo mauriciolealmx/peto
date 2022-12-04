@@ -21,6 +21,7 @@ const ApiStack = ({ stack }) => {
       'POST /posts': 'functions/posts/create.main',
       'POST /email': 'functions/emails/send.main',
       'POST /geofence-collection': 'functions/trackers/createGeofenceCollection.main',
+      'POST /device-location': 'functions/trackers/updateDeviceLocation.main',
     },
   });
 
