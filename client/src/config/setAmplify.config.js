@@ -24,4 +24,9 @@ Amplify.configure({
       },
     ],
   },
+  geo: {
+    AmazonLocationService: {
+      region: config.s3.REGION,
+    },
+  },
 });

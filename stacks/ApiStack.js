@@ -20,8 +20,11 @@ const ApiStack = ({ stack }) => {
       'GET /posts/{id}': 'functions/posts/get.main',
       'POST /posts': 'functions/posts/create.main',
       'POST /email': 'functions/emails/send.main',
+      'POST /geofence-collection': 'functions/trackers/createGeofenceCollection.main',
     },
   });
+
+  api.attachPermissions(['geo']);
 
   stack.addOutputs({
     ApiEndpoint: api.url,

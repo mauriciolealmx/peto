@@ -11,6 +11,7 @@
     "test": "sst load-config -- vitest run"
   },
   "devDependencies": {
+    "@aws-sdk/client-location": "^3.223.0",
     "@sendgrid/mail": "^7.7.0",
     "aws-cdk-lib": "2.39.1",
     "@serverless-stack/cli": "^1.15.11",
