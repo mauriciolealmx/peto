@@ -4,6 +4,7 @@ import ApiStack from './ApiStack';
 import FrontendStack from './FrontendStack';
 import StorageStack from './StorageStack';
 import AuthStack from './AuthStack';
+import EventBusStack from './EventBusStack';
 
 /**
  * @param {App} app
@@ -17,5 +18,10 @@ export default function (app) {
     },
   });
 
-  app.stack(StorageStack).stack(ApiStack).stack(AuthStack).stack(FrontendStack);
+  app
+    .stack(StorageStack)
+    .stack(ApiStack)
+    .stack(AuthStack)
+    .stack(FrontendStack)
+    .stack(EventBusStack);
 }
